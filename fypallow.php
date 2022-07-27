@@ -1,5 +1,16 @@
 <?php
-
+    require ('fypfunctions.php');
+    require ('fypconnection.php');
+    if(isset($_POST['logout'])){
+        $username = $_SESSION['username'];
+        $rememberdevice = stripslashes($_REQUEST['remember']);
+        $rememberdevice = mysqli_real_escape_string($con,$allow); 
+            $query = "UPDATE alldata SET remember = '".$rememberdevice."' WHERE permission = ''AND owner = '".$username."';";
+            if ($con->query($query) === TRUE) {
+                header("Location: fyplogout.php");
+            }else{
+        }
+    }
 ?>
 
 <html>
@@ -9,9 +20,9 @@
     <body>
         <h3>USB device have been permited for use</h3><br>
         <table>
-            <form>
-                <tr><td><input type='checkbox' name='remember'></td><td>Remember device</td><td><button name='history'>History</button></td></tr>
-                <tr><td></td><td></td><td><button name='logout'>Log-out</button></td></tr>
+            <form method='post'>
+                <tr><td><input type='checkbox' name='remember' value='yes'></td><td>Remember device</td><td><input type=submit name='history' placeholder='history'></td></tr>
+                <tr><td></td><td></td><td><input type='submit' name='logout' placeholder='Log-out'></td></tr>
             </form>
         </table>
     </body>

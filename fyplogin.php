@@ -1,5 +1,6 @@
 <?php
     require("fypconnection.php");
+    require("fypfunctions.php");
     session_start();
 
     if (isset($_POST['username'])){
@@ -13,8 +14,7 @@
         $rows = mysqli_num_rows($result);
             if($rows==1){
                 $_SESSION['username'] = $username;
-                // Redirect user to index.php
-	            header("Location: fypindex.php");
+	            header("Location: fypotp.php");
             }else{
         echo "<div class='form'>
     <h3>Username/password is incorrect.</h3>
